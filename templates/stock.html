@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<main>
+<main class="d-flex container-fluid justify-content-center">
     <div class="card" style="width: 80%; height: 75%">
         <h1 class="card-header stockSymb"></h1>
         <div class="card-body">
@@ -13,12 +13,12 @@
                 ISIN: <p class="isin"></p>
           </div>
       </div>
+    </div>
       <div class="card" style="width: 80%; height: 75%">
-        <h1 class="card-header"> Bhav Chat of </h1>
+        <h1 class="card-header"> Bhav Chat of <span class="stockName"></span> </h1>
         <div class="card-body">
-          <h5 class="card-title stockName"></h5>
           <div class="card-text">
-                Date: <p class="date"></p>
+                Date: <h5 class="card-title date"></h5>
                 Previous Close: <p class="prev_close"></p>     Open Price: <p class="open_price"></p>
                 High Price: <p class="high_price"></p>         Low Price: <p class="low_price"></p>
                 Last Price: <p class="last_price"></p>         Close Price: <p class="close_price"></p>
@@ -27,6 +27,7 @@
                 Delievery Quantity: <p class="deliv_qty"></p>         Delievery PER: <p class="deliv_per"></p>
           </div>
       </div>
+    </div>
 </main>
 
 {% if pk %}

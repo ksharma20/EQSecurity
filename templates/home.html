@@ -25,13 +25,14 @@
       <form action="/" method="post">
         {% csrf_token %}
       <div class="col-md-4 offset-md-4 mt-5 pt-3">
-      <div class="input-group mb-3">
+      <div class="input-group mb-3" style="position: relative;">
         <input type="text" id="stockPick" class="form-control" placeholder="Search ......" aria-label="Stock" name='stockPick'>
         <div class="m-3 input-group-append">
           <button type="submit" class="btn btn-success input-group-text">Search</button>
         </div>
         </form>
         </div>
+        <!-- <div class="stockRecommend border border-warning m-3"></div> -->
       </div>
 </main>
 
@@ -39,6 +40,7 @@
 <script>
     eqsec = {{eqsec|safe}}
     var stockPick = eqsec ;
+    // $(".stockRecommend")
     $("#stockPick").autocomplete({
         source: stockPick
     });

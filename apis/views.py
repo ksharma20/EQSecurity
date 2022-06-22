@@ -9,7 +9,7 @@ from .serializer import EQSecuritySer, BhavcopySer, models
 
 # Create your views here.
 def refresh(request):
-    context= {}
+    
     eqsecurity= pd.read_csv('https://archives.nseindia.com/content/equities/EQUITY_L.csv')
     for row in eqsecurity.itertuples():
         date = parser.parse(str(row[4]))
@@ -22,10 +22,10 @@ def refresh(request):
     bhavcopy[" DELIV_PER"].replace('-', 0, regex=True, inplace=True)
     for row in bhavcopy.itertuples():
         try:
-            symbol = EQSecurity.objects.get(symbol=f'{row[1]}').name
+            symbol = EQSecurity.objects.get(symbol=f'{row[1]}')
             # print(f' symbol={symbol}, series={row[2]}, date={row[3]}, prev_close={row[4]}, open_price={row[5]}, high_price={row[6]}, low_price={row[7]}, last_price={row[8]}, close_price={row[9]}, avg_price={row[10]}, ttl_qnty={row[11]}, turnover={row[12]}, trades={row[13]}, deliv_qty={row[14]}, deliv_per={row[15]} ')
             date = parser.parse(str(row[3]))
-            _, created= Bhavcopy.objects.get_or_create(symbol=EQSecurity.objects.get(symbol=str(row[1])), series=str(row[2]), date=date, prev_close=float(row[4]), open_price=float(row[5]), high_price=float(row[6]), low_price=float(row[7]), last_price=float(row[8]), close_price=float(row[9]), avg_price=float(row[10]), ttl_qnty=int(row[11]), turnover=float(row[12]), trades=int(row[13]), deliv_qty=int(row[14]), deliv_per=float(row[15]))
+            _, created= Bhavcopy.objects.get_or_create(symbol=symbol, series=str(row[2]), date=date, prev_close=float(row[4]), open_price=float(row[5]), high_price=float(row[6]), low_price=float(row[7]), last_price=float(row[8]), close_price=float(row[9]), avg_price=float(row[10]), ttl_qnty=int(row[11]), turnover=float(row[12]), trades=int(row[13]), deliv_qty=int(row[14]), deliv_per=float(row[15]))
 
         except Exception as e:
             print(f"*************************** ERROR: {e} ******************************************")
